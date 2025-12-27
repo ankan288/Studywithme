@@ -1,5 +1,5 @@
 // Tutor API Routes
-import { Router } from 'express';
+import { Router, Request, Response } from 'express';
 import { personalizedTutor, UserLevel } from '../tutor/personalizedTutor';
 
 const router = Router();
@@ -8,7 +8,7 @@ const router = Router();
  * POST /api/tutor/start
  * Start a new personalized learning journey
  */
-router.post('/start', async (req, res) => {
+router.post('/start', async (req: Request, res: Response) => {
   try {
     const { subject, level, priorKnowledge, learningStyle, hoursPerDay, targetDays, userId } = req.body;
     
@@ -42,7 +42,7 @@ router.post('/start', async (req, res) => {
  * GET /api/tutor/plan/:planId
  * Get a learning plan by ID
  */
-router.get('/plan/:planId', (req, res) => {
+router.get('/plan/:planId', (req: Request, res: Response) => {
   try {
     const { planId } = req.params;
     const plan = personalizedTutor.getPlan(planId);
@@ -66,7 +66,7 @@ router.get('/plan/:planId', (req, res) => {
  * GET /api/tutor/today/:planId
  * Get today's workflow for a plan
  */
-router.get('/today/:planId', async (req, res) => {
+router.get('/today/:planId', async (req: Request, res: Response) => {
   try {
     const { planId } = req.params;
     const workflow = await personalizedTutor.getTodayWorkflow(planId);
@@ -89,7 +89,7 @@ router.get('/today/:planId', async (req, res) => {
  * GET /api/tutor/day/:planId/:day
  * Get content for a specific day
  */
-router.get('/day/:planId/:day', async (req, res) => {
+router.get('/day/:planId/:day', async (req: Request, res: Response) => {
   try {
     const { planId, day } = req.params;
     const dayContent = await personalizedTutor.generateDayContent(planId, parseInt(day));
@@ -112,7 +112,7 @@ router.get('/day/:planId/:day', async (req, res) => {
  * POST /api/tutor/complete/:planId/:day
  * Mark a day as complete
  */
-router.post('/complete/:planId/:day', async (req, res) => {
+router.post('/complete/:planId/:day', async (req: Request, res: Response) => {
   try {
     const { planId, day } = req.params;
     const plan = await personalizedTutor.markDayComplete(planId, parseInt(day));
@@ -136,7 +136,7 @@ router.post('/complete/:planId/:day', async (req, res) => {
  * POST /api/tutor/missed/:planId/:day
  * Mark a day as missed and get catch-up plan
  */
-router.post('/missed/:planId/:day', async (req, res) => {
+router.post('/missed/:planId/:day', async (req: Request, res: Response) => {
   try {
     const { planId, day } = req.params;
     const plan = await personalizedTutor.markDayMissed(planId, parseInt(day));
@@ -161,7 +161,7 @@ router.post('/missed/:planId/:day', async (req, res) => {
  * GET /api/tutor/user/:userId/plans
  * Get all plans for a user
  */
-router.get('/user/:userId/plans', (req, res) => {
+router.get('/user/:userId/plans', (req: Request, res: Response) => {
   try {
     const { userId } = req.params;
     const plans = personalizedTutor.getUserPlans(userId);
