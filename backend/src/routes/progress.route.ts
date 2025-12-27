@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import { Router, Request, Response } from 'express';
 import { progressController } from '../controllers/progress.controller';
 import { LearningEvent } from '../types/index';
 
@@ -8,7 +8,7 @@ const router = Router();
  * POST /api/progress/event
  * Record a learning event
  */
-router.post('/event', async (req, res) => {
+router.post('/event', async (req: Request, res: Response) => {
   try {
     const event: LearningEvent = req.body;
     const result = await progressController.recordEvent(event);
@@ -23,7 +23,7 @@ router.post('/event', async (req, res) => {
  * GET /api/progress/summary/:studentId
  * Get student summary
  */
-router.get('/summary/:studentId', async (req, res) => {
+router.get('/summary/:studentId', async (req: Request, res: Response) => {
   try {
     const { studentId } = req.params;
     const data = await progressController.getStudentSummary(studentId);

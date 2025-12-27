@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import { Router, Request, Response } from 'express';
 import { assignmentController } from '../controllers/assignment.controller';
 import { DepthLevel, AssignmentStructure } from '../types/index';
 
@@ -8,7 +8,7 @@ const router = Router();
  * POST /api/assignments/initialize
  * Initialize with API key
  */
-router.post('/initialize', (req, res) => {
+router.post('/initialize', (req: Request, res: Response) => {
   try {
     const { apiKey } = req.body;
     assignmentController.initialize(apiKey);
@@ -23,7 +23,7 @@ router.post('/initialize', (req, res) => {
  * POST /api/assignments/generate
  * Generate a new assignment
  */
-router.post('/generate', async (req, res) => {
+router.post('/generate', async (req: Request, res: Response) => {
   try {
     const { topic, depth } = req.body;
     const data = await assignmentController.generate(topic, depth);
@@ -38,7 +38,7 @@ router.post('/generate', async (req, res) => {
  * POST /api/assignments/evaluate
  * Evaluate student's assignment answer
  */
-router.post('/evaluate', async (req, res) => {
+router.post('/evaluate', async (req: Request, res: Response) => {
   try {
     const { assignment, answer } = req.body;
     const data = await assignmentController.evaluate(assignment, answer);

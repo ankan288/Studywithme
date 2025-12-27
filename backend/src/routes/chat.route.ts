@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import { Router, Request, Response } from 'express';
 import { chatController } from '../controllers/chat.controller';
 import { DepthLevel, TaskMode } from '../types/index';
 
@@ -8,7 +8,7 @@ const router = Router();
  * POST /api/chat/message
  * Send a chat message
  */
-router.post('/message', async (req, res) => {
+router.post('/message', async (req: Request, res: Response) => {
   try {
     const { message, depth, mode, sessionId } = req.body;
     const response = await chatController.handleChat(message, depth, mode, sessionId || 'default-session');
@@ -23,7 +23,7 @@ router.post('/message', async (req, res) => {
  * POST /api/chat/initialize
  * Initialize the chat system with API key
  */
-router.post('/initialize', (req, res) => {
+router.post('/initialize', (req: Request, res: Response) => {
   try {
     const { apiKey } = req.body;
     chatController.initialize(apiKey);

@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import { Router, Request, Response } from 'express';
 import { dashboardController } from '../controllers/dashboard.controller';
 
 const router = Router();
@@ -7,7 +7,7 @@ const router = Router();
  * GET /api/dashboard/metrics
  * Get dashboard metrics
  */
-router.get('/metrics', async (req, res) => {
+router.get('/metrics', async (req: Request, res: Response) => {
   console.log(`[API] GET /api/dashboard/metrics`);
   try {
     const data = await dashboardController.getDashboardMetrics();

@@ -1,5 +1,5 @@
 // Analytics API Routes - Expose metrics for dashboard
-import { Router } from 'express';
+import { Router, Request, Response } from 'express';
 import { analyticsService } from '../analytics/analyticsService';
 
 const router = Router();
@@ -8,7 +8,7 @@ const router = Router();
  * GET /api/analytics/summary
  * Get overall metrics summary
  */
-router.get('/summary', (req, res) => {
+router.get('/summary', (req: Request, res: Response) => {
   try {
     const metrics = analyticsService.getMetricsSummary();
     
@@ -27,7 +27,7 @@ router.get('/summary', (req, res) => {
  * GET /api/analytics/subjects
  * Get popular subjects ranking
  */
-router.get('/subjects', (req, res) => {
+router.get('/subjects', (req: Request, res: Response) => {
   try {
     const subjects = analyticsService.getPopularSubjects();
     
@@ -46,7 +46,7 @@ router.get('/subjects', (req, res) => {
  * GET /api/analytics/depth
  * Get depth level distribution
  */
-router.get('/depth', (req, res) => {
+router.get('/depth', (req: Request, res: Response) => {
   try {
     const distribution = analyticsService.getDepthDistribution();
     
@@ -65,7 +65,7 @@ router.get('/depth', (req, res) => {
  * GET /api/analytics/events
  * Get recent events (for debugging/monitoring)
  */
-router.get('/events', (req, res) => {
+router.get('/events', (req: Request, res: Response) => {
   try {
     const limit = parseInt(req.query.limit as string) || 50;
     const events = analyticsService.getRecentEvents(limit);
@@ -86,7 +86,7 @@ router.get('/events', (req, res) => {
  * GET /api/analytics/status
  * Check if analytics service is ready
  */
-router.get('/status', (req, res) => {
+router.get('/status', (req: Request, res: Response) => {
   try {
     const isReady = analyticsService.isReady();
     
@@ -106,7 +106,7 @@ router.get('/status', (req, res) => {
  * POST /api/analytics/session/start
  * Track session start
  */
-router.post('/session/start', async (req, res) => {
+router.post('/session/start', async (req: Request, res: Response) => {
   try {
     const { sessionId, userId } = req.body;
     
@@ -131,7 +131,7 @@ router.post('/session/start', async (req, res) => {
  * POST /api/analytics/session/end
  * Track session end
  */
-router.post('/session/end', async (req, res) => {
+router.post('/session/end', async (req: Request, res: Response) => {
   try {
     const { sessionId, userId, duration, pagesVisited } = req.body;
     
