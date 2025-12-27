@@ -10,8 +10,8 @@ const router = Router();
  */
 router.post('/message', async (req, res) => {
   try {
-    const { message, depth, mode } = req.body;
-    const response = await chatController.handleChat(message, depth, mode);
+    const { message, depth, mode, sessionId } = req.body;
+    const response = await chatController.handleChat(message, depth, mode, sessionId || 'default-session');
     res.json({ success: true, data: response });
   } catch (error) {
     console.error('[Chat Route Error]', error);

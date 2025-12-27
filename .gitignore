@@ -12,6 +12,18 @@ dist
 dist-ssr
 *.local
 
+# Environment files (IMPORTANT - contains API keys)
+.env
+.env.local
+.env.*.local
+backend/.env
+frontend-student/.env
+frontend-dashboard/.env
+
+# Next.js build output
+.next
+out
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

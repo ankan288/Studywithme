@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { GoogleGenAI } from "@google/genai";
 import { DepthLevel, TaskMode } from '../types/index';
 import { promptBuilder } from './promptBuilder';
@@ -6,11 +7,20 @@ import { logger } from '../utils/logger';
 
 class GeminiClient {
   private client: GoogleGenAI | null = null;
-  private apiKey: string | null = null;
+  private apiKey: string;
+
+  constructor() {
+    this.apiKey = process.env.GEMINI_API_KEY || '';
+    if (this.apiKey) {
+      this.client = new GoogleGenAI({ apiKey: this.apiKey });
+      console.log('✅ Gemini API initialized with key from environment');
+    }
+  }
 
   public initialize(apiKey: string) {
     this.apiKey = apiKey;
     this.client = new GoogleGenAI({ apiKey });
+    console.log('✅ Gemini API initialized');
   }
 
   public isInitialized(): boolean {
@@ -24,7 +34,7 @@ class GeminiClient {
 
     try {
       const response = await this.client.models.generateContent({
-        model: "gemini-2.0-flash",
+        model: "gemini-2.5-flash",
         contents: prompt
       });
 
@@ -52,7 +62,7 @@ class GeminiClient {
 
     try {
       const response = await this.client.models.generateContent({
-        model: "gemini-2.0-flash",
+        model: "gemini-2.5-flash",
         config: {
           systemInstruction: systemInstruction,
         },

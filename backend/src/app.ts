@@ -6,6 +6,8 @@ import { progressRoutes } from './routes/progress.route';
 import { adaptiveRoutes } from './routes/adaptive.route';
 import { dashboardRoutes } from './routes/dashboard.route';
 import syllabusRoutes from './routes/syllabus.route';
+import { tutorRoutes } from './routes/tutor.route';
+import { analyticsRoutes } from './routes/analytics.route';
 
 const app = express();
 
@@ -28,6 +30,8 @@ app.use('/api/progress', progressRoutes);
 app.use('/api/adaptive', adaptiveRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 app.use('/api/syllabus', syllabusRoutes);
+app.use('/api/tutor', tutorRoutes);
+app.use('/api/analytics', analyticsRoutes);
 
 // Error handling middleware
 app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
