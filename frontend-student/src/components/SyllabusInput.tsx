@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { BookOpen, FileText, GraduationCap, Loader2, Sparkles } from 'lucide-react';
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+
 interface SyllabusInputProps {
   onSyllabusCreated: (syllabusId: string, syllabus: any) => void;
 }
@@ -24,7 +26,7 @@ export default function SyllabusInput({ onSyllabusCreated }: SyllabusInputProps)
     setError('');
 
     try {
-      const response = await fetch('http://localhost:3000/api/syllabus', {
+      const response = await fetch(`${API_URL}/api/syllabus`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

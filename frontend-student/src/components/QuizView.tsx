@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { CheckCircle, XCircle, Clock, ChevronRight, Award, RotateCcw, Loader2 } from 'lucide-react';
 import type { Question, QuestionSet, AssessmentResult } from '../utils/syllabusApi';
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+
 interface QuizViewProps {
   questionSet: QuestionSet;
   userId: string;
@@ -42,7 +44,7 @@ export default function QuizView({ questionSet, userId, onComplete, onRetry }: Q
   const handleSubmit = async () => {
     setSubmitting(true);
     try {
-      const response = await fetch('http://localhost:3000/api/syllabus/submit', {
+      const response = await fetch(`${API_URL}/api/syllabus/submit`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
