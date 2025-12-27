@@ -1,0 +1,10 @@
+{
+  "name": "studywm-backend",
+  "version": 2,
+  "env": {
+    "NODE_ENV": "production"
+  },
+  "build": {
+    "builder": "nixpacks"
+  }
+}

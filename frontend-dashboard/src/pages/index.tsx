@@ -66,7 +66,7 @@ export default function DashboardPage() {
           
           <div className="h-6 w-px bg-slate-200"></div>
 
-          <Link href="http://localhost:3001" className="flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-slate-800">
+          <Link href={process.env.NEXT_PUBLIC_STUDENT_APP_URL || 'http://localhost:3001'} className="flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-slate-800">
             <LogOut size={16} />
             Back to App
           </Link>

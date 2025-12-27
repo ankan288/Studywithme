@@ -26,11 +26,13 @@ export default function LearnPage() {
     setView('syllabus');
   };
 
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+
   const handleStartLearning = async (id: string) => {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch('http://localhost:3000/api/syllabus/learning-path', {
+      const response = await fetch(`${API_URL}/api/syllabus/learning-path`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -69,7 +71,7 @@ export default function LearnPage() {
     if (!learningPath || !currentModule) return;
 
     try {
-      const response = await fetch(`http://localhost:3000/api/syllabus/learning-path/${learningPath.id}/complete`, {
+      const response = await fetch(`${API_URL}/api/syllabus/learning-path/${learningPath.id}/complete`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -95,7 +97,7 @@ export default function LearnPage() {
 
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:3000/api/syllabus/questions', {
+      const response = await fetch(`${API_URL}/api/syllabus/questions`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

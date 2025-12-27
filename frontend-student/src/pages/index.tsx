@@ -9,6 +9,8 @@ import { DepthSelector } from '@/components/DepthSelector';
 import { ModeSelector } from '@/components/ModeSelector';
 import { AssignmentFeedbackPanel } from '@/components/AssignmentFeedback';
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+
 const StudentHomePage: React.FC = () => {
   const { sendMessage: chatSendMessage, loading: chatLoading } = useChat();
 
@@ -76,7 +78,7 @@ const StudentHomePage: React.FC = () => {
     setMessages(prev => [...prev, statusMsg]);
 
     try {
-      const response = await fetch('http://localhost:3000/api/syllabus', {
+      const response = await fetch(`${API_URL}/api/syllabus`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -130,7 +132,7 @@ const StudentHomePage: React.FC = () => {
       setSyllabusLoading(true);
       try {
         const topic = currentSyllabus.topics[0];
-        const response = await fetch('http://localhost:3000/api/syllabus/questions', {
+        const response = await fetch(`${API_URL}/api/syllabus/questions`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -182,7 +184,7 @@ const StudentHomePage: React.FC = () => {
       // Generate exam
       setSyllabusLoading(true);
       try {
-        const response = await fetch('http://localhost:3000/api/syllabus/exam', {
+        const response = await fetch(`${API_URL}/api/syllabus/exam`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
