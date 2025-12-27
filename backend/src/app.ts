@@ -23,6 +23,23 @@ app.get('/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
+// Root route
+app.get('/', (req, res) => {
+  res.json({
+    name: 'StudyWithMe API',
+    version: '1.0.0',
+    status: 'running',
+    endpoints: {
+      chat: '/api/chat/message',
+      syllabus: '/api/syllabus',
+      tutor: '/api/tutor/start',
+      dashboard: '/api/dashboard/metrics',
+      analytics: '/api/analytics/summary',
+      health: '/health'
+    }
+  });
+});
+
 // API Routes
 app.use('/api/chat', chatRoutes);
 app.use('/api/assignments', assignmentRoutes);
